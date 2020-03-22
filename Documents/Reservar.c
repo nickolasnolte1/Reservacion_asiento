@@ -1,49 +1,130 @@
 #include <stdio.h>
 #include <stdlib.h>
-int asientos[6][32];
-char vuelo[5];
-int opcion; 
 
-//Función de Bienvenida
-void bienvenida(){
-    printf("Escribe el número de vuelo\n");
-    scanf("%s", &vuelo); 
-    printf("Bienvenido al vuelo %s", vuelo); 
-}  
+// Colores
+void blue(){
+  printf ("\033[0;34m");
+} 
+void green(){
+  printf ("\033[0;32m");
+}
+void red(){
+  printf("\033[0;31m");
+}
+void yellow(){
+  printf("\033[0;33m");
+}
+void reset (){
+  printf ("\033[0m");
+}
 
-//Mapa de asientos
-void mapa(){
-    for (int i=0;i<32;i++){
-        for (int j=0;j<6;j++){
-            asientos[i][j] = 0;
-        }
+//Funciones globales
+int asientos [32][7]
+int filas [1][32]
+char columnas [7]={' ','A','B','C','D','E','F'
+};
+char vuelo [10];
+char opcion [2];
+char*asiento= opcion;
+int i,j;
+
+//Funcion de Bienvenida
+void bienvenida (){
+    printf("\nBIENVENIDO A SAMALTE AIRLINES\n");
+     printf("------------------------------\n");
+
+red();
+printf("     ****\n");
+yellow();
+printf("      *****\n");
+red();
+printf("       ******\n");
+yellow();
+printf("       *******\n");
+red();
+printf("        **********************************\n");
+blue();
+printf("         \\                            ////////\n");
+red();
+printf("          \\                              *****\n");
+printf("           ***************    ***************\n");
+printf("                         *   *\n");
+printf("                        *   *\n");
+printf("                       *   *\n");
+printf("                         *\n");
+reset();
+
+        printf("Escribe el número de vuelo\n");
+        scanf("%s, vuelo");
         printf("\n");
-    }
-    printf("[%d][%d]", asientos[i][j]); 
+        printf("Bienvenido al vuelo %s\n", vuelo);
 }
 
 
-//Main
+ 
+ //Escoger Asientos
+    void escoger(){
+        printf("Escoja un número de asiento: \n");
+        scanf("%c", opcion); 
+}
+
+//Mapa de asientos
+void mapa(){
+    printf("Asientos disponibles: 0\n Asientos ocupados: X\n");
+    printf("\n");
+    for (int a=0;a<6;a++){
+        printf("[%c]", columnas[a]);
+    }
+    printf("\n");
+    for (int a=0;a<1;a++){
+        for (int b=0;b<32;b++){
+            asientos[i][j]=0;
+            printf("[%d]", asientos[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+//Clear screen
+void clearscreen (){
+    system("@cls||clear");
+}
+
+//Main 
 int main (void){
+    //Definiciones locales
+    int opcion;
+    //Código
     bienvenida();
+    Menu:
+    printf("----------------------\n");
     printf("MENÚ PRINCIPAL\n");
-    printf("1.Reservar Asientos\n2.Ver Mapa de Asientos\n3.Salir\n");
-    scanf("%d", &opcion); 
+    printf("1. Reservar Asientos\n 2. Ver Mapa de Asientos\n 3. Salir\n");
+    printf("----------------------\n");
+    Escoger:
+    scanf("%d", &opcion);
     //Escoger Asientos
     if (opcion==1){
-
+        escoger();
+        printf("%s", &asiento[0]);
     }
     //MAPA de Asientos
     else if(opcion==2){
-        mapa(); 
+        clearscreen();
+        mapa();
+        goto Escoger;
     }
     //Salir
     else if(opcion==3){
-        
+        clearscreen();
+        printf("GRACIAS POR UTILIZAR NUESTROS SERVICIOS!\n");
+        exit(0);
     }
     else{
-        printf("Opción Invalida");
+        clearscreen();
+        printf("Opción inválida");
+        goto Menu;
     }
-    
-    return 0; 
+
+    return 0;
 }
